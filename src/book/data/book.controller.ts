@@ -4,10 +4,10 @@ import {
   Delete,
   Get,
   Param,
-  ParseBoolPipe,
   ParseIntPipe,
   Post,
   Put,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Book } from './book.dto';
@@ -43,8 +43,14 @@ export class BookController {
     return 'book by id';
   }
 
+  // custom pipe to validate
+  // @Post('/addBookWithPipe')
+  // addBookWithPipe(@Body(new BookPipe()) book: Book): string {
+  //   return this.bookService.addBookPipeService(book);
+  // }
+
   @Post('/addBookWithPipe')
-  addBookWithPipe(@Body(new BookPipe()) book: Book): string {
+  addBookWithPipe1(@Body(new ValidationPipe()) book: Book): string {
     return this.bookService.addBookPipeService(book);
   }
 }
